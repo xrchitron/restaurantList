@@ -14,7 +14,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/restaurants", (req, res) => {
-  res.render("index", { restaurants });
+  const keyword = req.query.search?.trim();
+  const matchedRestaurant = keyword
+    ? restaurants.filter((store) => {
+        return (
+          store.name.toLowerCase().includes(keyword) ||
+          store.category.toLowerCase().includes(keyword)
+        );
+      })
+    : restaurants;
+  res.render("index", { restaurants: matchedRestaurant, keyword });
 });
 
 app.get("/restaurants/:id", (req, res) => {

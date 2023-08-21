@@ -18,10 +18,28 @@
     <!-- only need to reference file from 'public' to the location -->
     <!-- if href start with ./ => which means this(not /root) location but from public, ../ is necessary to change back into the parent context -->
     <link href="../stylesheets/style.css" rel="stylesheet" type="text/css" />
-    <title>New project</title>
+    <title>My Restaurant List</title>
   </head>
   <body>
+    <header>
+      <!-- navigation -->
+      <nav class="navbar navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <img
+              src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+              width="30"
+              height="30"
+              class="d-inline-block align-top"
+              alt="我的餐廳清單"
+            />
+            我的餐廳清單
+          </a>
+        </div>
+      </nav>
 
+      <div class="banner"></div>
+    </header>
     {{{body}}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

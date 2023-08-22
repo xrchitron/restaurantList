@@ -32,6 +32,10 @@ app.get("/restaurants/:id", (req, res) => {
   res.render("detail", { restaurant });
 });
 
+app.get("/user", (req, res) => {
+  res.render("user");
+});
+
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`);
 });

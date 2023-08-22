@@ -4,11 +4,11 @@ This is a restaurant website which users are able to login, get restaurant infor
 
 ### Project snapshots
 
-![Alt restaurantList_img_01](image link)
-![Alt restaurantList_img_02](image link)
-![Alt restaurantList_img_03](image link)
-![Alt restaurantList_img_04](image link)
-![Alt restaurantList_img_05](image link)
+![Alt restaurantList_img_01](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_01.png)
+![Alt restaurantList_img_02](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_02.png)
+![Alt restaurantList_img_03](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_03.png)
+![Alt restaurantList_img_04](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_04.png)
+![Alt restaurantList_img_05](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_05.png)
 
 ### Installation
 

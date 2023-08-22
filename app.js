@@ -10,7 +10,7 @@ app.set("views", "./views");
 app.use(express.static("public")); //載入靜態檔案
 
 app.get("/", (req, res) => {
-  res.redirect("/restaurants");
+  res.render("user", { layout: "userLayout" });
 });
 
 app.get("/restaurants", (req, res) => {

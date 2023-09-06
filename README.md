@@ -1,6 +1,6 @@
 # Restaurant in Taipei
 
-This is a restaurant website which users are able to login, get restaurant information and promote different stores.
+This is a restaurant website which users are able to get restaurant information and promote different stores.
 
 ### Project snapshots
 
@@ -24,19 +24,31 @@ git clone https://github.com/xrchitron/restaurantList.git
 cd restaurantList
 ```
 
-3. install nodemon (if nodemon has installed in global environment, skip this step)
+3. install package
 
 ```
-npm install --save-dev nodemon
+npm install
 ```
 
-4. install express-handlebars
+4. create database in mysql (not in the terminal)
 
 ```
-npm install express-handlebars
+CREATE DATABASE restaurant;
 ```
 
-5. execute project
+5. create migration
+
+```
+npm run migrate
+```
+
+6. create seeder
+
+```
+npm run seed
+```
+
+7. execute project
 
 ```
 npm run dev
@@ -51,8 +63,7 @@ The Express server is running on http://localhost:3000
 ### Features
 
 1. users are able to visit restaurant information as a visiter
-2. users are able to sign up and login in (developing)
-3. users are able to promote customized restaurant information (developing)
+2. users are able to promote customized restaurant information
 
 ## Environment Setup
 

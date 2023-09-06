@@ -1,19 +1,30 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
 const asyncHandler = require("express-async-handler");
+const methodOverride = require("method-override");
+const flash = require("connect-flash");
+const session = require("express-session");
 const { Op } = require("sequelize");
 const app = express();
 const port = 3000;
-// const restaurants = require("./public/jsons/restaurant.json").results;
 
 app.engine(".hbs", engine({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 app.set("views", "./views");
 app.use(express.static("public")); //載入靜態檔案
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.use(
+  session({
+    secret: "ThisIsSecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(flash());
 
 //invoke database
 const db = require("./models");
-// const restaurant = require("./models/restaurant");
 const restaurant = db.restaurant;
 
 app.get("/", (req, res) => {
@@ -46,9 +57,26 @@ app.get(
     res.render("index", { restaurants: matchedRestaurant, keyword });
   })
 );
-app.post("/restaurants", (req, res) => {
-  res.redirect("/restaurants");
-});
+app.post(
+  "/restaurants",
+  asyncHandler(async (req, res) => {
+    const { name, name_en, category, image, location, phone, google_map, rating, description } =
+      req.body;
+    const createContent = await restaurant.create({
+      name,
+      name_en,
+      category,
+      image,
+      location,
+      phone,
+      google_map,
+      rating,
+      description,
+    });
+    req.flash("success", "Thanks for your support");
+    res.redirect("/restaurants");
+  })
+);
 app.get(
   "/restaurants/:id",
   asyncHandler(async (req, res) => {

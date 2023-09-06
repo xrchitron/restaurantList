@@ -46,7 +46,9 @@ app.get(
     res.render("index", { restaurants: matchedRestaurant, keyword });
   })
 );
-
+app.post("/restaurants", (req, res) => {
+  res.redirect("/restaurants");
+});
 app.get(
   "/restaurants/:id",
   asyncHandler(async (req, res) => {

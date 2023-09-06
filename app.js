@@ -1,10 +1,9 @@
 const express = require("express");
 const { engine } = require("express-handlebars");
-const asyncHandler = require("express-async-handler");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
-const { Op } = require("sequelize");
+const router = require("./routes"); //index.js would be found automatically
 const app = express();
 const port = 3000;
 
@@ -22,92 +21,7 @@ app.use(
   })
 );
 app.use(flash());
-
-//invoke database
-const db = require("./models");
-const restaurant = db.restaurant;
-
-app.get("/", (req, res) => {
-  res.render("login", { layout: "loginLayout" });
-});
-
-app.get(
-  "/restaurants",
-  asyncHandler(async (req, res) => {
-    const keyword = req.query.search?.trim().toLowerCase();
-    const matchedRestaurant = keyword
-      ? await restaurant.findAll({
-          attributes: ["id", "name", "category", "image", "rating"],
-          raw: true,
-          where: {
-            [Op.or]: {
-              name: {
-                [Op.substring]: `${keyword}`,
-              },
-              category: {
-                [Op.substring]: `${keyword}`,
-              },
-            },
-          },
-        })
-      : await restaurant.findAll({
-          attributes: ["id", "name", "category", "image", "rating"],
-          raw: true,
-        });
-    res.render("index", { restaurants: matchedRestaurant, keyword });
-  })
-);
-app.post(
-  "/restaurants",
-  asyncHandler(async (req, res) => {
-    const { name, name_en, category, image, location, phone, google_map, rating, description } =
-      req.body;
-    const createContent = await restaurant.create({
-      name,
-      name_en,
-      category,
-      image,
-      location,
-      phone,
-      google_map,
-      rating,
-      description,
-    });
-    req.flash("success", "Thanks for your support");
-    res.redirect("/restaurants");
-  })
-);
-app.get(
-  "/restaurants/:id",
-  asyncHandler(async (req, res) => {
-    const id = Number(req.params.id);
-    const restaurant_content = await restaurant.findAll({
-      attributes: [
-        "id",
-        "name",
-        "name_en",
-        "category",
-        "image",
-        "location",
-        "phone",
-        "google_map",
-        "rating",
-        "description",
-      ],
-      raw: true,
-      where: {
-        id: {
-          [Op.eq]: id,
-        },
-      },
-    });
-    res.render("detail", { restaurant: restaurant_content[0] });
-  })
-);
-
-app.get("/user", (req, res) => {
-  res.render("user");
-});
+app.use(router); //invoke router
 
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`);

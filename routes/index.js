@@ -11,8 +11,8 @@ router.get("/", (req, res) => {
   res.render("login", { layout: "loginLayout" });
 });
 
-router.get("/user", (req, res) => {
-  res.render("user");
+router.get("/create", (req, res) => {
+  res.render("create");
 });
 
 //export router

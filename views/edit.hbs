@@ -1,0 +1,114 @@
+<form action="/restaurants" method="POST">
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-12 col-md-10 mx-auto">
+        <p class="mb-1">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            value="{{restaurant.name}}"
+            aria-label="{{restaurant.name}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+
+        <p class="mb-1">
+          <label for="name_en" class="text-secondary">
+            <i class="fa-solid fa-language"></i>
+            英文名：
+          </label>
+          <input
+            type="text"
+            id="name_en"
+            name="name_en"
+            class="form-control"
+            value="{{restaurant.name_en}}"
+            aria-label="{{restaurant.name_en}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+
+        <p class="mb-1">
+          <label for="category" class="text-secondary">
+            <i class="fas fa-utensils pr-2"></i>
+            類別：
+          </label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            class="form-control"
+            value="{{restaurant.category}}"
+            aria-label="{{restaurant.category}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+
+        <p class="mb-1">
+          <label for="location" class="text-secondary">
+            <i class="fas fa-map-marker-alt pr-2"></i>
+            地址：
+          </label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            class="form-control"
+            value="{{restaurant.location}}"
+            aria-label="{{restaurant.location}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+
+        <p class="mb-1">
+          <label for="google_map" class="text-secondary">
+            <i class="fas fa-location-arrow pr-2 fa-xs"></i>
+            google map url：
+          </label>
+          <input
+            type="text"
+            id="google_map"
+            name="google_map"
+            class="form-control"
+            value="{{restaurant.google_map}}"
+            aria-label="{{restaurant.google_map}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+        <p class="mb-1">
+          <label for="phone" class="text-secondary">
+            <i class="fas fa-mobile-alt pr-2"></i>
+            電話：
+          </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            class="form-control"
+            value="{{restaurant.phone}}"
+            aria-label="{{restaurant.phone}}"
+            aria-describedby="basic-addon1"
+          />
+        </p>
+
+        <p class="mb-1">
+          <textarea
+            class="form-control"
+            aria-label="Description"
+            id="description"
+            name="description"
+            rows="10"
+          >{{restaurant.description}}"</textarea>
+        </p>
+        <p class="mb-1">
+          <input type="text" class="form-control" id="image" name="image" placeholder="Image URL" />
+        </p>
+        <div class="input-group mb-3 d-grid gap-2 mx-auto">
+          <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

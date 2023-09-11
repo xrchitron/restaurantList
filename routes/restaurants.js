@@ -76,23 +76,27 @@ router.get("/create", (req, res, next) => {
     next(error);
   }
 });
-
+router.get("/edit/:id", async (req, res, next) => {
+  const id = Number(req.params.id);
+  try {
+    const restaurant_content = await restaurant.findAll({
+      raw: true,
+      where: {
+        id: {
+          [Op.eq]: id,
+        },
+      },
+    });
+    res.render("edit", { restaurant: restaurant_content[0] });
+  } catch (error) {
+    error.errorMessage = "Edit failure";
+    next(error);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
     const restaurant_content = await restaurant.findAll({
-      attributes: [
-        "id",
-        "name",
-        "name_en",
-        "category",
-        "image",
-        "location",
-        "phone",
-        "google_map",
-        "rating",
-        "description",
-      ],
       raw: true,
       where: {
         id: {

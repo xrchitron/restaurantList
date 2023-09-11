@@ -10,7 +10,10 @@
               <img class="card-img-top" src="{{restaurant.image}}" alt="{{restaurant.name}}" />
               <div class="card-body p-3">
                 <h6 class="card-title mb-1">{{restaurant.name}}</h6>
-
+                <div class="restaurant-category mb-1">
+                  <i class="fa-solid fa-language"></i>
+                  {{restaurant.name_en}}
+                </div>
                 <div class="restaurant-category mb-1">
                   <i class="fas fa-utensils pr-2"></i>
                   {{restaurant.category}}

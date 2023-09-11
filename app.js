@@ -4,6 +4,8 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 const router = require("./routes"); //index.js would be found automatically
+const messageHandler = require("./middlewares/message-handler");
+const errorHandler = require("./middlewares/error-handler");
 const app = express();
 const port = 3000;
 
@@ -25,8 +27,9 @@ app.use(
   })
 );
 app.use(flash());
+app.use(messageHandler); //invoke messageHandler
 app.use(router); //invoke router
-
+app.use(errorHandler); //invoke errorHandler
 app.listen(port, () => {
   console.log(`express server is running on http://localhost:${port}`);
 });

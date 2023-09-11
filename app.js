@@ -1,5 +1,4 @@
 const express = require("express");
-// const { create } = require("express-handlebars");
 const expressHbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
@@ -7,8 +6,6 @@ const session = require("express-session");
 const router = require("./routes"); //index.js would be found automatically
 const app = express();
 const port = 3000;
-
-// app.engine("handlebars", hbs.engine);
 
 const hbs = expressHbs.create({ extname: ".hbs" });
 app.engine(".hbs", hbs.engine);

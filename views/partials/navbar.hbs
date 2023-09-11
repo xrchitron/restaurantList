@@ -25,7 +25,6 @@
           aria-label="category sort"
           onchange="this.form.submit()"
         >
-          <option {{#unless order}}selected disabled{{/unless}}>Sort</option>
           <option value="1" {{#if (eq order "1")}}selected{{/if}}>A -> Z</option>
           <option value="2" {{#if (eq order "2")}}selected{{/if}}>Z -> A</option>
           <option value="3" {{#if (eq order "3")}}selected{{/if}}>Category</option>

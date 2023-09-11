@@ -18,11 +18,23 @@
                   <i class="fas fa-utensils pr-2"></i>
                   {{restaurant.category}}
                 </div>
-
-                <span class="badge rounded-pill bg-danger font-weight-normal">
-                  {{restaurant.rating}}
-                  <i class="fas fa-star fa-xs"></i>
-                </span>
+                <div class="restaurant-category mb-1">
+                  <span class="badge rounded-pill bg-danger font-weight-normal">
+                    {{restaurant.rating}}
+                    <i class="fas fa-star fa-xs"></i>
+                  </span>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <form action="/restaurants" method="put" style="display: inline; margin-block-end: 0;">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <form action="/restaurants/{{restaurant.id}}" method="get" style="display: inline; margin-block-end: 0;">
+                      <button type="submit" class="btn btn-outline-success">Detail</button>
+                    </form>
+                    <form action="/restaurants/edit" method="get" style="display: inline; margin-block-end: 0;">
+                      <button type="submit" class="btn btn-outline-success">Edit</button>
+                    </form>
+                </div>
               </div>
             </div>
           </a>

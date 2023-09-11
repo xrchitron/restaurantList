@@ -7,10 +7,38 @@ const { Op } = require("sequelize");
 const db = require("../models");
 const restaurant = db.restaurant;
 
+// router.get(
+//   "/",
+//   asyncHandler(async (req, res) => {
+//     const keyword = req.query.search?.trim().toLowerCase();
+//     const matchedRestaurant = keyword
+//       ? await restaurant.findAll({
+//           attributes: ["id", "name", "category", "image", "rating"],
+//           raw: true,
+//           where: {
+//             [Op.or]: {
+//               name: {
+//                 [Op.substring]: `${keyword}`,
+//               },
+//               category: {
+//                 [Op.substring]: `${keyword}`,
+//               },
+//             },
+//           },
+//         })
+//       : await restaurant.findAll({
+//           attributes: ["id", "name", "category", "image", "rating"],
+//           raw: true,
+//         });
+//     res.render("index", { restaurants: matchedRestaurant, keyword, message: req.flash("success") });
+//   })
+// );
 router.get(
   "/",
   asyncHandler(async (req, res) => {
     const keyword = req.query.search?.trim().toLowerCase();
+    const order = req.query.sort;
+    console.log(order);
     const matchedRestaurant = keyword
       ? await restaurant.findAll({
           attributes: ["id", "name", "category", "image", "rating"],
@@ -30,9 +58,20 @@ router.get(
           attributes: ["id", "name", "category", "image", "rating"],
           raw: true,
         });
-    res.render("index", { restaurants: matchedRestaurant, keyword, message: req.flash("success") });
+    res.render("index", {
+      restaurants: matchedRestaurant,
+      keyword,
+      order,
+      message: req.flash("success"),
+      helpers: {
+        eq(a, b) {
+          return a === b;
+        },
+      },
+    });
   })
 );
+
 router.post(
   "/",
   asyncHandler(async (req, res) => {

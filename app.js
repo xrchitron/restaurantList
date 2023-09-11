@@ -1,5 +1,6 @@
 const express = require("express");
-const { engine } = require("express-handlebars");
+// const { create } = require("express-handlebars");
+const expressHbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
@@ -7,9 +8,15 @@ const router = require("./routes"); //index.js would be found automatically
 const app = express();
 const port = 3000;
 
-app.engine(".hbs", engine({ extname: ".hbs" }));
+// app.engine("handlebars", hbs.engine);
+
+const hbs = expressHbs.create({ extname: ".hbs" });
+app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
+hbs.handlebars.registerHelper("eq", function (a, b) {
+  return a === b;
+});
 app.use(express.static("public")); //載入靜態檔案
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));

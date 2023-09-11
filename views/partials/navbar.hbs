@@ -1,28 +1,35 @@
 <div class="container my-5">
   <div class="row justify-content-around">
-    <div class="col-3">
-      <form action="/restaurants">
+    <div class="col-4">
+      <form>
         <div class="input-group mb-3">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon1"><i
+          <button class="btn btn-outline-secondary" type="submit" id="search-button"><i
               class="fa-solid fa-magnifying-glass"
             ></i></button>
           <input
             type="text"
+            name="search"
             class="form-control"
-            placeholder=""
+            value="{{keyword}}"
+            placeholder="restaurant or category"
             aria-label="Example text with button addon"
-            aria-describedby="button-addon1"
+            aria-describedby="search-button"
           />
         </div></form>
     </div>
-    <div class="col-3">
-      <form action="/restaurants" method="POST">
-        <select class="form-select" aria-label="category sort">
-          <option selected>Sort</option>
-          <option value="1">A -> Z</option>
-          <option value="2">Z -> A</option>
-          <option value="3">Category</option>
-          <option value="4">Region</option>
+    <div class="col-2">
+      <form>
+        <select
+          class="form-select"
+          name="sort"
+          aria-label="category sort"
+          onchange="this.form.submit()"
+        >
+          <option {{#unless order}}selected disabled{{/unless}}>Sort</option>
+          <option value="1" {{#if (eq order "1")}}selected{{/if}}>A -> Z</option>
+          <option value="2" {{#if (eq order "2")}}selected{{/if}}>Z -> A</option>
+          <option value="3" {{#if (eq order "3")}}selected{{/if}}>Category</option>
+          <option value="4" {{#if (eq order "4")}}selected{{/if}}>Region</option>
         </select>
       </form>
     </div>

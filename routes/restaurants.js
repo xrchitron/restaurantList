@@ -104,7 +104,18 @@ router.put("/:id", async (req, res, next) => {
     req.flash("success", "Update successfully");
     res.redirect(`/restaurants/${id}`);
   } catch (error) {
-    error.errorMessage = "Server error";
+    error.errorMessage = "Update error";
+    next(error);
+  }
+});
+router.delete("/:id", async (req, res, next) => {
+  const id = Number(req.params.id);
+  try {
+    await restaurant.destroy({ where: { id } });
+    req.flash("success", "Delete successfully");
+    res.redirect("/restaurants");
+  } catch (error) {
+    error.errorMessage = "Delete error";
     next(error);
   }
 });

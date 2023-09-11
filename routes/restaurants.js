@@ -1,7 +1,6 @@
 //invoke express and express router
 const express = require("express");
 const router = express.Router();
-const asyncHandler = require("express-async-handler");
 const { Op } = require("sequelize");
 //invoke database
 const db = require("../models");
@@ -46,7 +45,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const { name, name_en, category, image, location, phone, google_map, rating, description } =
       req.body;
@@ -68,7 +67,17 @@ router.post("/", async (req, res) => {
     next(error);
   }
 });
-router.get("/:id", async (req, res) => {
+
+router.get("/create", (req, res, next) => {
+  try {
+    res.render("create");
+  } catch (error) {
+    error.errorMessage = "Server error";
+    next(error);
+  }
+});
+
+router.get("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {
     const restaurant_content = await restaurant.findAll({

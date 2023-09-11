@@ -93,6 +93,21 @@ router.get("/edit/:id", async (req, res, next) => {
     next(error);
   }
 });
+router.put("/:id", async (req, res, next) => {
+  const id = Number(req.params.id);
+  try {
+    const { name, name_en, category, image, location, google_map, phone, description } = req.body;
+    await restaurant.update(
+      { name, name_en, category, image, location, google_map, phone, description },
+      { where: { id } }
+    );
+    req.flash("success", "Update successfully");
+    res.redirect(`/restaurants/${id}`);
+  } catch (error) {
+    error.errorMessage = "Server error";
+    next(error);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   const id = Number(req.params.id);
   try {

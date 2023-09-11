@@ -25,7 +25,7 @@
                   </span>
                 </div>
                 <div class="d-flex flex-row-reverse">
-                    <form action="/restaurants" method="put" style="display: inline; margin-block-end: 0;">
+                    <form action="/restaurants/{{restaurant.id}}?_method=DELETE" method="post" style="display: inline; margin-block-end: 0;">
                       <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <form action="/restaurants/{{restaurant.id}}" method="get" style="display: inline; margin-block-end: 0;">

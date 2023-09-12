@@ -10,8 +10,8 @@ const fcP = require("../public/javascripts/functionsPool");
 
 router.get("/", async (req, res, next) => {
   const keyword = req.query.search?.trim().toLowerCase();
-  const order = req.query.sort || "1";
-  const page = parseInt(req.query.page) || 1;
+  const order = !req.cookies.sort ? req.cookies.sort : req.query.sort || "1";
+  const page = !req.cookies.page ? req.cookies.page : parseInt(req.query.page) || 1;
   const limit = 6;
   try {
     if (keyword) {
@@ -43,6 +43,8 @@ router.get("/", async (req, res, next) => {
     }
     const matchedRestaurant = rows;
     const pageAmount = Math.ceil(count / limit);
+    res.cookie("sort", order);
+    res.cookie("page", page);
     res.render("index", {
       restaurants: matchedRestaurant,
       keyword,

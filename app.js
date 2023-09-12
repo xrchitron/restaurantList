@@ -3,6 +3,7 @@ const expressHbs = require("express-handlebars");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const router = require("./routes"); //index.js would be found automatically
 const messageHandler = require("./middlewares/message-handler");
 const errorHandler = require("./middlewares/error-handler");
@@ -34,6 +35,7 @@ app.use(
   })
 );
 app.use(flash());
+app.use(cookieParser());
 app.use(messageHandler); //invoke messageHandler
 app.use(router); //invoke router
 app.use(errorHandler); //invoke errorHandler

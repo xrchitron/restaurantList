@@ -1,7 +1,7 @@
 <div class="container my-5">
-  <div class="row justify-content-around">
-    <div class="col-4">
-      <form>
+  <form>
+    <div class="row justify-content-around">
+      <div class="col-4">
         <div class="input-group mb-3">
           <button class="btn btn-outline-secondary" type="submit" id="search-button"><i
               class="fa-solid fa-magnifying-glass"
@@ -15,10 +15,9 @@
             aria-label="Example text with button addon"
             aria-describedby="search-button"
           />
-        </div></form>
+        </div>
     </div>
-    <div class="col-2">
-      <form>
+    <div class="col-2" style="display: inline">
         <select
           class="form-select"
           name="sort"
@@ -30,7 +29,7 @@
           <option value="3" {{#if (eq order "3")}}selected{{/if}}>Category</option>
           <option value="4" {{#if (eq order "4")}}selected{{/if}}>Region</option>
         </select>
-      </form>
+      </div>
     </div>
-  </div>
+  </form>
 </div>

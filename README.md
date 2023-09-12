@@ -9,6 +9,8 @@ This is a restaurant website which users are able to get restaurant information 
 ![Alt restaurantList_img_03](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_03.png)
 ![Alt restaurantList_img_04](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_04.png)
 ![Alt restaurantList_img_05](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_05.png)
+![Alt restaurantList_img_06](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_06.png)
+![Alt restaurantList_img_07](https://github.com/xrchitron/restaurantList/blob/main/public/img/restaurantList_img_07.png)
 
 ### Installation
 
@@ -63,7 +65,12 @@ The Express server is running on http://localhost:3000
 ### Features
 
 1. users are able to visit restaurant information as a visiter
-2. users are able to promote customized restaurant information
+2. users are able to create customized restaurant information
+3. users are able to search restaurants by name and category
+4. users are able to sort restaurants by different category
+5. users are able to update restaurants' info
+6. users are able to delete restaurants' info
+7. users are able to visit restaurants by pagination
 
 ## Environment Setup
 

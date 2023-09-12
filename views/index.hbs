@@ -44,3 +44,30 @@
     </div>
   </div>
 </div>
+{{!-- pagination --}}
+<div class="container mt-5">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <form action="/restaurants" method="GET" style="display: inline;">
+          <input type="hidden" name="page" value="{{prev}}">
+          <button class="page-link" type="submit">Previous</button>
+        </form>
+      </li>
+      {{#times pageAmount}}
+        <li class="page-item">
+          <form action="/restaurants" method="GET" style="display: inline;">
+            <input type="hidden" name="page" value="{{this}}">
+            <button class="page-link" type="submit">{{this}}</button>
+          </form>
+        </li>
+      {{/times}}
+      <li class="page-item">
+        <form action="/restaurants" method="GET" style="display: inline;">
+          <input type="hidden" name="page" value="{{next}}">
+          <button class="page-link" type="submit">next</button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</div>

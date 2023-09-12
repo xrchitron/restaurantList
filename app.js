@@ -16,6 +16,13 @@ app.set("views", "./views");
 hbs.handlebars.registerHelper("eq", function (a, b) {
   return a === b;
 });
+hbs.handlebars.registerHelper("times", function (n, block) {
+  let rawHTML = "";
+  for (let i = 1; i <= n; i++) {
+    rawHTML += block.fn(i);
+  }
+  return rawHTML;
+});
 app.use(express.static("public")); //載入靜態檔案
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));

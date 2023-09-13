@@ -5,11 +5,13 @@ const router = express.Router();
 //invoke router module
 const restaurants = require("./restaurants");
 
-router.get("/", (req, res) => {
-  res.render("login", { layout: "loginLayout" });
-});
+router.get("/", renderLogin);
 
 router.use("/restaurants", restaurants);
 
 //export router
 module.exports = router;
+
+function renderLogin(req, res) {
+  res.render("login", { layout: "loginLayout" });
+}

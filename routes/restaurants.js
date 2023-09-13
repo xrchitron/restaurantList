@@ -5,8 +5,6 @@ const { Op } = require("sequelize");
 //invoke database
 const db = require("../models");
 const restaurant = db.restaurant;
-//invoke functionsPool
-const fcP = require("../public/javascripts/functionsPool");
 
 router.get("/", renderRestaurants);
 router.post("/", createRestaurant);
@@ -69,7 +67,7 @@ async function fetchRestaurantData(keyword, order, page, limit) {
   let query = {
     attributes: ["id", "name", "name_en", "category", "image", "rating"],
     raw: true,
-    order: [[...fcP.orderCase(order)]],
+    order: [[...orderCase(order)]],
     offset: (page - 1) * limit,
     limit,
   };
@@ -162,5 +160,19 @@ async function renderRestaurant(req, res, next) {
   } catch (error) {
     error.errorMessage = "Server error";
     next(error);
+  }
+}
+function orderCase(order) {
+  switch (order) {
+    case "1":
+      return ["name_en"];
+    case "2":
+      return ["name_en", "DESC"];
+    case "3":
+      return ["category"];
+    case "4":
+      return ["location"];
+    default:
+      return [];
   }
 }

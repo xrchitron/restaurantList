@@ -9,7 +9,7 @@ const messageHandler = require("./middlewares/message-handler");
 const errorHandler = require("./middlewares/error-handler");
 const app = express();
 const port = 3000;
-
+const dotenv = require("dotenv").config();
 const hbs = expressHbs.create({ extname: ".hbs" });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");

@@ -10,8 +10,8 @@ const fcP = require("../public/javascripts/functionsPool");
 
 router.get("/", async (req, res, next) => {
   const keyword = req.query.search?.trim().toLowerCase();
-  const order = !req.cookies.sort ? req.cookies.sort : req.query.sort || "1";
-  const page = !req.cookies.page ? req.cookies.page : parseInt(req.query.page) || 1;
+  const order = !req.cookies.sort ? req.cookies.sort || "1" : req.query.sort || "1";
+  const page = !req.cookies.page ? req.cookies.page || 1 : parseInt(req.query.page) || 1;
   const limit = 6;
   try {
     if (keyword) {

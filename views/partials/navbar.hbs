@@ -1,35 +1,28 @@
-<div class="container my-5">
-  <form>
-    <div class="row justify-content-around">
-      <div class="col-4">
-        <div class="input-group mb-3">
-          <button class="btn btn-outline-secondary" type="submit" id="search-button"><i
-              class="fa-solid fa-magnifying-glass"
-            ></i></button>
-          <input
-            type="text"
-            name="search"
-            class="form-control"
-            value="{{keyword}}"
-            placeholder="restaurant or category"
-            aria-label="Example text with button addon"
-            aria-describedby="search-button"
-          />
-        </div>
+<nav class="navbar navbar-light bg-light">
+  <div class="container d-flex">
+
+    <div class="p-2 flex-grow-1">
+      <a class="navbar-brand logo-font" href="/restaurants">
+        <img
+          src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt="Restaurants in Taipei"
+        />
+        Restaurants in Taipei
+      </a>
     </div>
-    <div class="col-2" style="display: inline">
-        <select
-          class="form-select"
-          name="sort"
-          aria-label="category sort"
-          onchange="this.form.submit()"
-        >
-          <option value="1" {{#if (eq order "1")}}selected{{/if}}>A -> Z</option>
-          <option value="2" {{#if (eq order "2")}}selected{{/if}}>Z -> A</option>
-          <option value="3" {{#if (eq order "3")}}selected{{/if}}>Category</option>
-          <option value="4" {{#if (eq order "4")}}selected{{/if}}>Region</option>
-        </select>
-      </div>
+    <div class="p-2">
+      <a href="/restaurants/create">
+        <button type="button" class="btn btn-outline-primary">Create</button>
+      </a>
     </div>
-  </form>
-</div>
+    <div class="p-2">
+      <a href="/logout">
+        <button type="button" class="btn btn-outline-danger">Logout</button>
+      </a>
+    </div>
+
+  </div>
+</nav>

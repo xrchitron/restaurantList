@@ -4,14 +4,14 @@ const router = express.Router();
 
 //invoke router module
 const restaurants = require("./restaurants");
+const users = require("./users");
 
-router.get("/", renderLogin);
-
+router.get("/", redirectLogin);
 router.use("/restaurants", restaurants);
-
+router.use(users);
 //export router
 module.exports = router;
 
-function renderLogin(req, res) {
-  res.render("login", { layout: "loginLayout" });
+function redirectLogin(req, res) {
+  res.redirect("/login");
 }

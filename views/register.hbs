@@ -1,0 +1,57 @@
+<div class="container my-5" style="margin: 0 auto;">
+  <div class="card" style="width: 90%; margin: 0 auto;">
+    <div class="row">
+      {{! img }}
+      <div class="col-6">
+        <img src="/img/login_register.jpg" alt="login_register_image" style="border-radius: 5px;" />
+      </div>
+      {{! /img }}
+      {{! page }}
+      <div class="col-6" style="margin: auto;">
+        <div class="d-flex justify-content-center">
+          <h1 class="my-3 logo-font">My Restaurant List</h1>
+        </div>
+        <div class="card-body" style="margin: auto">
+          <div class="d-flex justify-content-center">
+            <h1 class="my-5" style="color: #c4c4c4">Register</h1>
+          </div>
+
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="User name" name="name" />
+            </div>
+            <div class="mb-3">
+              <input type="email" class="form-control" placeholder="email" name="email" />
+            </div>
+            <div class="mb-3">
+              <input type="password" class="form-control" placeholder="Password" name="password" />
+            </div>
+
+            <div class="row">
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-outline-secondary btn-lg"
+                  style="border-radius: 24px"
+                  type="submit"
+                >Register</button>
+              </div>
+            </div>
+
+          </form>
+          <div class="d-flex justify-content-center">
+            <h5 class="my-5" style="color: #c4c4c4">or</h5>
+          </div>
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              style="border-radius: 24px"
+              onclick="window.location.href='/login'"
+            >Login</button>
+          </div>
+        </div>
+      </div>
+      {{! /page }}
+
+    </div>
+  </div>
+</div>

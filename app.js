@@ -10,6 +10,8 @@ const errorHandler = require("./middlewares/error-handler");
 const app = express();
 const port = 3000;
 const dotenv = require("dotenv").config();
+const passport = require("./config/passport");
+// <hbs helper>
 const hbs = expressHbs.create({ extname: ".hbs" });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
@@ -24,6 +26,7 @@ hbs.handlebars.registerHelper("times", function (n, block) {
   }
   return rawHTML;
 });
+// </hbs helper>
 app.use(express.static("public")); //載入靜態檔案
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -35,6 +38,8 @@ app.use(
   })
 );
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(cookieParser());
 app.use(messageHandler); //invoke messageHandler
 app.use(router); //invoke router

@@ -11,11 +11,11 @@ const app = express();
 const port = 3000;
 const dotenv = require("dotenv").config();
 const passport = require("./config/passport");
-// <hbs helper>
 const hbs = expressHbs.create({ extname: ".hbs" });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
+// <hbs helper>
 hbs.handlebars.registerHelper("eq", function (a, b) {
   return a === b;
 });

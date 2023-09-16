@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const User = db.User;
+const queryInterface = db.sequelize.getQueryInterface();
+const restaurant = require("../public/jsons/restaurantDefault.json");
 const bcrypt = require("bcryptjs");
 router.get("/login", renderLogin);
 router.get("/register", renderRegister);
@@ -39,7 +41,6 @@ async function checkExistingUser(email) {
     where: { email },
     raw: true,
   });
-  console.log(checkEmail.length);
   if (checkEmail.length === 0) {
     return { status: false, message: "Email already exists" };
   }
@@ -70,6 +71,16 @@ async function register(req, res, next) {
     const createUserStatus = await createUser(name, email, password);
     if (createUserStatus.status) {
       req.flash("register", createUserStatus.message);
+      const user = await User.findAll({
+        order: [["id", "DESC"]],
+        limit: 1,
+        raw: true,
+      });
+      console.log(user[0].id);
+      restaurant.results.forEach((result) => {
+        result.userId = user[0].id;
+      });
+      await queryInterface.bulkInsert("restaurants", restaurant.results, {});
       return res.redirect("login");
     }
   } catch (error) {

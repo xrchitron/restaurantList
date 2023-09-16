@@ -76,7 +76,6 @@ async function register(req, res, next) {
         limit: 1,
         raw: true,
       });
-      console.log(user[0].id);
       restaurant.results.forEach((result) => {
         result.userId = user[0].id;
       });

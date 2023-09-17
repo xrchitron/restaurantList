@@ -18,7 +18,7 @@ function renderLogin(req, res) {
 function renderRegister(req, res) {
   res.render("register", { layout: "loginLayout" });
 }
-function logout(req, res) {
+function logout(req, res, next) {
   req.logout((error) => {
     if (error) {
       next(error);
@@ -50,6 +50,15 @@ async function createUser(name, email, password) {
   //generate hashed password
   const hash = await bcrypt.hash(password, 10);
   await User.create({ name, email, password: hash });
+  const user = await User.findAll({
+    order: [["id", "DESC"]],
+    limit: 1,
+    raw: true,
+  });
+  restaurant.results.forEach((result) => {
+    result.userId = user[0].id;
+  });
+  await queryInterface.bulkInsert("restaurants", restaurant.results, {});
   return { status: true, message: "User registered successfully" };
 }
 async function register(req, res, next) {
@@ -70,15 +79,6 @@ async function register(req, res, next) {
     const createUserStatus = await createUser(name, email, password);
     if (createUserStatus.status) {
       req.flash("register", createUserStatus.message);
-      const user = await User.findAll({
-        order: [["id", "DESC"]],
-        limit: 1,
-        raw: true,
-      });
-      restaurant.results.forEach((result) => {
-        result.userId = user[0].id;
-      });
-      await queryInterface.bulkInsert("restaurants", restaurant.results, {});
       return res.redirect("login");
     }
   } catch (error) {

@@ -2,10 +2,11 @@ const passport = require("passport");
 //invoke database
 const db = require("../models");
 const User = db.User;
+const queryInterface = db.sequelize.getQueryInterface();
+const restaurant = require("../public/jsons/restaurantDefault.json");
 const LocalStrategy = require("passport-local");
 const FacebookStrategy = require("passport-facebook");
-const GoogleStrategy = require("passport-google-oauth");
-const xStrategy = require("passport-twitter");
+const GoogleStrategy = require("passport-google-oauth2");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
@@ -46,34 +47,22 @@ passport.use(
       callbackURL: process.env.FACEBOOK_CALLBACK_URL,
       profileFields: ["email", "displayName"],
     },
-    (accessToken, refreshToken, profile, done) => {
-      const email = profile.emails[0].value;
-      const name = profile.displayName;
-
-      return User.findOne({
-        attributes: ["id", "name", "email"],
-        where: { email },
-        raw: true,
-      }).then((user) => {
-        if (user) return done(null, user);
-
-        const randomPwd = Math.random().toString(36).slice(-8);
-        return bcrypt
-          .hash(randomPwd, 10)
-          .then((hash) => {
-            User.create({ name, email, password: hash });
-          })
-          .then((user) => {
-            done(null, { id: user.id, name: user.name, email: user.email });
-          })
-          .catch((error) => {
-            error.errorMessage = "Login Failure";
-            done(error);
-          });
-      });
-    }
+    thirdPartyStrategy
   )
 );
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+      profileFields: ["email", "displayName"],
+    },
+    thirdPartyStrategy
+  )
+);
+
 //當驗證成功後，serializeUser會將使用者物件中的重要屬性 id、name 和 email序列化後傳遞給 done 函式。換句話說，他的作用在於要存什麼資料到 session 然後讓 passport 在登入流程中呼叫。
 passport.serializeUser((user, done) => {
   const { id, name, email } = user;
@@ -85,3 +74,31 @@ passport.deserializeUser((user, done) => {
 });
 
 module.exports = passport;
+async function thirdPartyStrategy(accessToken, refreshToken, profile, done) {
+  try {
+    const email = profile.emails[0].value;
+    const name = profile.displayName;
+    const user = await User.findOne({
+      attributes: ["id", "name", "email"],
+      where: { email },
+      raw: true,
+    });
+    if (user) return done(null, user);
+    const randomPwd = Math.random().toString(36).slice(-8);
+    const hash = await bcrypt.hash(randomPwd, 10);
+    await User.create({ name, email, password: hash });
+    const userId = await User.findAll({
+      order: [["id", "DESC"]],
+      limit: 1,
+      raw: true,
+    });
+    restaurant.results.forEach((result) => {
+      result.userId = userId[0].id;
+    });
+    await queryInterface.bulkInsert("restaurants", restaurant.results, {});
+    await done(null, { id: user.id, name: user.name, email: user.email });
+  } catch (error) {
+    error.errorMessage = "Login Failure";
+    done(error);
+  }
+}

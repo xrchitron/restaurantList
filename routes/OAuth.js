@@ -21,4 +21,13 @@ router.get(
     failureFlash: true,
   })
 );
+router.get("/login/google", passport.authenticate("google", { scope: ["email"] }));
+router.get(
+  "/oauth2/redirect/google",
+  passport.authenticate("google", {
+    successRedirect: "/restaurants",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
 module.exports = router;

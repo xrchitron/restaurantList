@@ -22,8 +22,9 @@ async function renderRestaurants(req, res, next) {
   const order = !req.cookies.sort ? req.cookies.sort || "1" : req.query.sort || "1";
   const page = !req.cookies.page ? req.cookies.page || 1 : parseInt(req.query.page) || 1;
   const limit = 6;
+  const userId = req.user.id;
   try {
-    const { count, rows } = await fetchRestaurantData(keyword, order, page, limit);
+    const { count, rows } = await fetchRestaurantData(keyword, order, page, limit, userId);
     const { pageAmount, prev, next } = handlePagination(count, limit, page);
     res.cookie("sort", order);
     res.cookie("page", page);
@@ -45,6 +46,7 @@ async function createRestaurant(req, res, next) {
   try {
     const { name, name_en, category, image, location, phone, google_map, rating, description } =
       req.body;
+    const userId = req.user.id;
     await restaurant.create({
       name,
       name_en,
@@ -55,6 +57,7 @@ async function createRestaurant(req, res, next) {
       google_map,
       rating,
       description,
+      userId,
     });
     req.flash("success", "Thanks for your support");
     res.redirect("/restaurants");
@@ -63,10 +66,11 @@ async function createRestaurant(req, res, next) {
     next(error);
   }
 }
-async function fetchRestaurantData(keyword, order, page, limit) {
+async function fetchRestaurantData(keyword, order, page, limit, userId) {
   let query = {
     attributes: ["id", "name", "name_en", "category", "image", "rating"],
     raw: true,
+    where: { userId },
     order: [[...orderCase(order)]],
     offset: (page - 1) * limit,
     limit,
@@ -74,12 +78,15 @@ async function fetchRestaurantData(keyword, order, page, limit) {
 
   if (keyword) {
     query.where = {
-      [Op.or]: {
-        name: {
-          [Op.substring]: `${keyword}`,
-        },
-        category: {
-          [Op.substring]: `${keyword}`,
+      [Op.and]: {
+        userId: userId,
+        [Op.or]: {
+          name: {
+            [Op.substring]: `${keyword}`,
+          },
+          category: {
+            [Op.substring]: `${keyword}`,
+          },
         },
       },
     };
@@ -119,7 +126,7 @@ async function editRestaurantPage(req, res, next) {
     next(error);
   }
 }
-function updateRestaurantInfo() {
+function updateRestaurantInfo(req, res, next) {
   const id = Number(req.params.id);
   try {
     const { name, name_en, category, image, location, google_map, phone, description } = req.body;

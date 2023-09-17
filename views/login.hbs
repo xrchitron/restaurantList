@@ -42,12 +42,13 @@
 
           <div class="mb-5">
             <div class="d-grid gap-2">
-
-              <button
-                class="btn btn-outline-secondary btn-lg"
-                style="border-radius: 24px"
-                onclick="window.location.href='/register'"
-              >Register</button>
+              <form action="/registere" method="GET">
+                <button
+                  class="btn btn-outline-secondary btn-lg"
+                  style="border-radius: 24px; width: 100%;"
+                  type="submit"
+                >Register</button>
+              </form>
               <form action="/login/google" method="GET">
                 <button
                   class="btn btn-outline-secondary btn-lg"
@@ -63,14 +64,6 @@
                   type="submit"
                 ><i class="fa-brands fa-facebook fa-lg" style="color: #c4c4c4;"></i>
                   Sign in with Facebook</button>
-              </form>
-              <form action="/login/twitter" method="GET">
-                <button
-                  class="btn btn-outline-secondary btn-lg"
-                  style="border-radius: 24px; width: 100%;"
-                  type="submit"
-                ><i class="fa-brands fa-x-twitter fa-lg" style="color: #c4c4c4;"></i>
-                  Sign in with X</button>
               </form>
             </div>
           </div>

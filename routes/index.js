@@ -6,9 +6,10 @@ const router = express.Router();
 const restaurants = require("./restaurants");
 const users = require("./users");
 const oAuth = require("./OAuth");
+const authHandler = require("../middlewares/auth-handler");
 
 router.get("/", redirectLogin);
-router.use("/restaurants", restaurants);
+router.use("/restaurants", authHandler, restaurants);
 router.use(users);
 router.use(oAuth);
 //export router

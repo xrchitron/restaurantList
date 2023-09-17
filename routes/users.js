@@ -61,7 +61,6 @@ async function register(req, res, next) {
       req.flash("register", checkFields.message);
       return res.redirect("back");
     }
-
     const checkUser = await checkExistingUser(email);
     if (checkUser.status) {
       req.flash("register", checkUser.message);

@@ -50,13 +50,14 @@ npm run migrate
 npm run seed
 ```
 
-7. generate clientId and clientSecret by facebook and google
-   The following website will guide you to handle the settings, and default CALLBACK_URL is http://localhost:3000/oauth2/redirect/facebook or google
-   .env file should be created, please reference .env.example
-   facebook: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
-   google: https://www.makeuseof.com/nodejs-google-authentication/
+7. generate clientId and clientSecret by facebook and google. The following website will guide you to handle the settings, and default CALLBACK_URL is http://localhost:3000/oauth2/redirect/facebook or google
 
-8. execute project
+8. .env file should be created, please reference .env.example
+
+   > facebook: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
+   > google: https://www.makeuseof.com/nodejs-google-authentication/
+
+9. execute project
 
 ```
 npm run dev

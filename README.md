@@ -50,7 +50,13 @@ npm run migrate
 npm run seed
 ```
 
-7. execute project
+7. generate clientId and clientSecret by facebook and google
+   The following website will guide you to handle the settings, and default CALLBACK_URL is http://localhost:3000/oauth2/redirect/facebook or google
+   .env file should be created, please reference .env.example
+   facebook: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
+   google: https://www.makeuseof.com/nodejs-google-authentication/
+
+8. execute project
 
 ```
 npm run dev
@@ -64,13 +70,14 @@ The Express server is running on http://localhost:3000
 
 ### Features
 
-1. users are able to visit restaurant information as a visiter
-2. users are able to create customized restaurant information
-3. users are able to search restaurants by name and category
-4. users are able to sort restaurants by different category
-5. users are able to update restaurants' info
-6. users are able to delete restaurants' info
-7. users are able to visit restaurants by pagination
+1. users are able to register as new users
+2. users are able to register with facebook or google
+3. users are able to create customized restaurant information
+4. users are able to search restaurants by name and category
+5. users are able to sort restaurants by different category
+6. users are able to update restaurants' info
+7. users are able to delete restaurants' info
+8. users are able to visit restaurants by pagination
 
 ## Environment Setup
 

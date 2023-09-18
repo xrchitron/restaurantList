@@ -50,15 +50,20 @@ async function createUser(name, email, password) {
   //generate hashed password
   const hash = await bcrypt.hash(password, 10);
   await User.create({ name, email, password: hash });
+  // < note: same code reference by config/passport >
+  // find the newest userId which just added
   const user = await User.findAll({
     order: [["id", "DESC"]],
     limit: 1,
     raw: true,
   });
+  //added userId into default restaurants json file
   restaurant.results.forEach((result) => {
     result.userId = user[0].id;
   });
+  //bulkInsert default restaurants' info into database
   await queryInterface.bulkInsert("restaurants", restaurant.results, {});
+  // < note: same code reference by config/passport >
   return { status: true, message: "User registered successfully" };
 }
 async function register(req, res, next) {

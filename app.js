@@ -15,7 +15,7 @@ const hbs = expressHbs.create({ extname: ".hbs" });
 app.engine(".hbs", hbs.engine);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
-// <hbs helper>
+// < hbs helper >
 hbs.handlebars.registerHelper("eq", function (a, b) {
   return a === b;
 });
@@ -26,7 +26,7 @@ hbs.handlebars.registerHelper("times", function (n, block) {
   }
   return rawHTML;
 });
-// </hbs helper>
+// < hbs helper >
 app.use(express.static("public")); //載入靜態檔案
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));

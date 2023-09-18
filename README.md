@@ -54,8 +54,8 @@ npm run seed
 
 8. .env file should be created, please reference .env.example
 
-   > facebook: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
-   > google: https://www.makeuseof.com/nodejs-google-authentication/
+   - facebook: https://www.twilio.com/blog/facebook-oauth-login-node-js-app-passport-js
+   - google: https://www.makeuseof.com/nodejs-google-authentication/
 
 9. execute project
 
